@@ -1,0 +1,85 @@
+
+<div class="navbar-compo">
+
+    <!-- top navbar -->
+    
+
+      <!-- sidbar -->
+    <div [class.open]="isClassAdded" class="sidebar">
+        <div class="logo_details">
+          <div class="logo_name">A M N E X</div>
+          <div (click)="toggleClass()"><i class="fa fa-bars" id="btn"></i></div>
+        </div>
+        <ul class="nav-list">
+          <li>
+            <a href="/dashboard" >
+                <i class="fa fa-dashboard"></i>
+              <span class="link_name">Dashboard</span>
+            </a>
+            <span class="tooltip">Dashboard</span>
+          </li>
+          <li (click)="toggleDropdown()">
+            <a class=" dropdowndropbtn">
+                <i class="fa fa-indent"></i>
+              <span class="link_name">Incidents</span>
+             @if(isClassAdded){
+                @if(isDropdownOpen){
+                    <i class="fa fa-caret-up"></i>
+                  }
+                  @else{
+                    <i class="fa fa-caret-down"></i>
+                  }
+             }
+            </a>
+            @if(isDropdownOpen){
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-car"></i>
+                            <span class="link_name">OverSpeed</span>
+                        </a>
+                        <span class="tooltip">OverSpeed</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-car"></i>
+                            <span class="link_name">AQI</span>
+                        </a>
+                        <span class="tooltip">AQI</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-car"></i>
+                            <span class="link_name">Incident 3</span>
+                        </a>
+                        <span class="tooltip">Incident 3</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-car"></i>
+                            <span class="link_name">Incident 4</span>
+                        </a>
+                        <span class="tooltip">Incident 4</span>
+                    </li>
+                </ul>}
+                <span class="tooltip">Incidents</span>
+          </li>
+        </ul>
+      </div>
+      <section class="home-section">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-3 mb-lg-0 ">
+                    <li class="text-light p-2">
+                        <span  class="text-light me-2">DARSHAN BHALANI</span>
+                        <i class="fa fa-caret-down" id="btn"></i>
+                    </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <app-dashboard></app-dashboard>
+      </section>
+<div>
+
