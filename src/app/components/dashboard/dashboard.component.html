@@ -1,61 +1,43 @@
 <div class="container-fluid d-flex justify-content-around mt-5 row" style="height: 35vh;">
     <div class="col col-lg-3 col-md-3 col-sm-12">
         <app-circular-counter [title]="'OverSpeed'" [count]="incidentAQI.length "
-        (click)='fatchData("OverSpeed")'></app-circular-counter>
+            (click)='fatchData("OverSpeed")'></app-circular-counter>
     </div>
     <div class="col col-lg-3 col-md-3 col-sm-12">
         <app-circular-counter [title]="'AQI'" [count]="incidentOverSpeed.length"
-        (click)='fatchData("AQI")'></app-circular-counter>
+            (click)='fatchData("AQI")'></app-circular-counter>
     </div>
     <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'Incident 3'" [count]="'5'" (click)='fatchData("photos")'></app-circular-counter>
+        <app-circular-counter [title]="'Street Light'" [count]="'5'"
+            (click)='fatchData("photos")'></app-circular-counter>
     </div>
     <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'Incident 4'" [count]="'8'" (click)='fatchData("todos")'></app-circular-counter>
+        <app-circular-counter [title]="'Traffic Light'" [count]="'8'"
+            (click)='fatchData("todos")'></app-circular-counter>
     </div>
 
     @if(flag1){
-        <div class="col-12 kendo-grid-data mt-3 d-flex justify-content-center flex-column">
-            <h4>Incident details</h4>
-           
-            <kendo-grid 
-            [kendoGridBinding]="incidentOverSpeed" [height]="500"
-            kendoGridSelectBy="id"
-            [(selectedKeys)]="mySelection"
-            [pageSize]="20"
-            [pageable]="true"
-            [sortable]="true"
-            [groupable]="true"
-            [reorderable]="true"
-            [resizable]="true"
-            [height]="500"
-            [columnMenu]="{ filter: true }"
-            >
-            <ng-template kendoGridToolbarTemplate>
-                <kendo-textbox
-                  [style.width.px]="165"
-                  placeholder="Search in all columns..."
-                  (valueChange)="onFilter($event)"
-                ></kendo-textbox>
-                <kendo-grid-spacer></kendo-grid-spacer>
-                <button kendoGridExcelCommand type="button">
-                  Export to Excel
-                </button>
-                <button kendoGridPDFCommand >Export to PDF</button>
-              </ng-template>
-                <kendo-grid-column field="vehicleNo" title="Vehicle No">
-                </kendo-grid-column>
-                <kendo-grid-column field="description" title="Description">
-                </kendo-grid-column>
-                <kendo-grid-column field="timeStamp" title="Time Stamp">
-                </kendo-grid-column>
-            </kendo-grid>
-        </div>
-        }
-        @else if(flag2){
+    <div class="col-12 kendo-grid-data mt-5 d-flex justify-content-center flex-column">
+        <h4>Incident details - OverSpeed</h4>
+        <kendo-grid [kendoGridBinding]="incidentOverSpeed" [height]="500" kendoGridSelectBy="id" [pageSize]="20"
+            [pageable]="true" [sortable]="true" [groupable]="true" [reorderable]="true" [resizable]="true"
+            [height]="500" [columnMenu]="{ filter: true }">
+            <kendo-grid-column field="vehicleNo" title="Vehicle No">
+            </kendo-grid-column>
+            <kendo-grid-column field="description" title="Description">
+            </kendo-grid-column>
+            <kendo-grid-column field="timeStamp" title="Time Stamp">
+            </kendo-grid-column>
+        </kendo-grid>
+    </div>
+    }
+    @else if(flag2){
+    <div class="col-12 kendo-grid-data mt-5 d-flex justify-content-center flex-column">
         <div class="kendo-grid-data">
-            <h4>Incident details</h4>
-            <kendo-grid [kendoGridBinding]="incidentAQI" [height]="400">
+            <h4>Incident details - AQI</h4>
+            <kendo-grid [kendoGridBinding]="incidentAQI" [height]="500" kendoGridSelectBy="id" [pageSize]="20"
+                [pageable]="true" [sortable]="true" [groupable]="true" [reorderable]="true" [resizable]="true"
+                [height]="500" [columnMenu]="{ filter: true }">
                 <kendo-grid-column field="pollNo" title="Poll No">
                 </kendo-grid-column>
                 <kendo-grid-column field="area" title="Area">
@@ -66,5 +48,8 @@
                 </kendo-grid-column>
             </kendo-grid>
         </div>
-        }
+    </div>
+    }
 </div>
+
+

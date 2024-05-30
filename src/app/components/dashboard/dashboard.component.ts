@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CircularCounterComponent } from '../circular-counter/circular-counter.component';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,9 @@ export class DashboardComponent {
   flag2=false;
   incidentAQI:any=[];
   incidentOverSpeed:any=[];
+  modalTitle: string = '';
+
+  constructor(private modalService: NgbModal) {}
 
   ngOnInit():void{
     this.httpClient.get('https://localhost:7091/AQI/GetAllIncidents').subscribe((data:any) => {
@@ -37,7 +41,4 @@ export class DashboardComponent {
       this.flag1=true;
     }
   }
-  
-  onFilter(){}
- 
 }

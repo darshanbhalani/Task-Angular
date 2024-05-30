@@ -1,0 +1,16 @@
+<div class="col-12 kendo-grid-data p-2 d-flex justify-content-center flex-column">
+    <span class="p-2"><i class="fa fa-home pe-2"></i><i class="fa fa-chevron-right pe-2"></i>Configurations</span>
+    <div class="kendo-grid-data">
+        <kendo-grid [kendoGridBinding]="configurationsList" [height]="600" kendoGridSelectBy="id" [pageSize]="20"
+            [pageable]="true" [sortable]="true" [groupable]="false" [reorderable]="true" [resizable]="true"
+            [height]="500" [columnMenu]="{ filter: true }">
+            <kendo-grid-column field="name" title="Name">
+            </kendo-grid-column>
+            <kendo-grid-column title="Action" [width]="200" [columnMenu]="false">
+                <ng-template kendoGridCellTemplate>
+                        <i class="fa fa-pencil"></i>
+                </ng-template>
+            </kendo-grid-column>
+        </kendo-grid>
+    </div>
+</div>

@@ -2,8 +2,6 @@
 <div class="navbar-compo">
 
     <!-- top navbar -->
-    
-
       <!-- sidbar -->
     <div [class.open]="isClassAdded" class="sidebar">
         <div class="logo_details">
@@ -12,7 +10,7 @@
         </div>
         <ul class="nav-list">
           <li>
-            <a href="/dashboard" >
+            <a href="/dashboard" [class.active]="true">
                 <i class="fa fa-dashboard"></i>
               <span class="link_name">Dashboard</span>
             </a>
@@ -34,36 +32,43 @@
             @if(isDropdownOpen){
                 <ul>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-car"></i>
+                        <a href="#" (click)="openModal($event,content,'OverSpeed')">
+                          <i class="fa fa-truck-fast"></i>
                             <span class="link_name">OverSpeed</span>
                         </a>
                         <span class="tooltip">OverSpeed</span>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-car"></i>
+                        <a href="#" (click)="openModal($event,content,'AQI')">
+                          <i class="fa fa-cloud"></i>
                             <span class="link_name">AQI</span>
                         </a>
                         <span class="tooltip">AQI</span>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-car"></i>
-                            <span class="link_name">Incident 3</span>
+                        <a href="#" (click)="openModal($event,content,'Street Light')">
+                          <i class="fa-solid fa-shower"></i>
+                            <span class="link_name">Street Light</span>
                         </a>
-                        <span class="tooltip">Incident 3</span>
+                        <span class="tooltip">Street Light</span>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-car"></i>
-                            <span class="link_name">Incident 4</span>
+                        <a href="#" (click)="openModal($event,content,'Traffic Light')">
+                          <i class="fa fa-traffic-light"></i>
+                            <span class="link_name">Traffic Light</span>
                         </a>
-                        <span class="tooltip">Incident 4</span>
+                        <span class="tooltip">Traffic Light</span>
                     </li>
                 </ul>}
                 <span class="tooltip">Incidents</span>
           </li>
+          <li>
+            <a href="/configurations">
+              <i class="fa fa-gears"></i>
+                <span class="link_name">Configurations</span>
+            </a>
+            <span class="tooltip">Configurations</span>
+        </li>
         </ul>
       </div>
       <section class="home-section">
@@ -79,7 +84,21 @@
               </div>
             </div>
           </nav>
-          <app-dashboard></app-dashboard>
+          <router-outlet></router-outlet>
       </section>
 <div>
+
+<!-- incident modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ modalTitle }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+   
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
 
