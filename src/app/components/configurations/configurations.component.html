@@ -4,13 +4,39 @@
         <kendo-grid [kendoGridBinding]="configurationsList" [height]="600" kendoGridSelectBy="id" [pageSize]="20"
             [pageable]="true" [sortable]="true" [groupable]="false" [reorderable]="true" [resizable]="true"
             [height]="500" [columnMenu]="{ filter: true }">
-            <kendo-grid-column field="name" title="Name">
+            <kendo-grid-column field="configurationName" title="Name">
             </kendo-grid-column>
             <kendo-grid-column title="Action" [width]="200" [columnMenu]="false">
-                <ng-template kendoGridCellTemplate>
-                        <i class="fa fa-pencil"></i>
+                <ng-template kendoGridCellTemplate let-dataItem>
+                        <i class="fa fa-pencil" (click)="openModal($event,content,dataItem)"></i>
                 </ng-template>
             </kendo-grid-column>
         </kendo-grid>
     </div>
 </div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{ modalTitle }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+          <h1>{{thresholdValue.value}}</h1>
+          <h1>{{intervalTime}}</h1>
+          <div class="mb-3">
+            <label for="thresholdValue" class="form-label">Threshold Value</label>
+            <input #thresholdValue type="number" [value]="thresholdValue" class="form-control" id="thresholdValue" name="thresholdValue">
+          </div>
+          <div class="mb-3">
+            <label for="intervalTime" class="form-label">Interval Time</label>
+            <input #intervalTime type="number" [value]="intervalTime" class="form-control" id="intervalTime" name="intervalTime">
+          </div>
+        </form>
+      </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); saveChanges(thresholdValue.value,intervalTime.value)">Save</button>
+    </div>
+  </ng-template>
+  

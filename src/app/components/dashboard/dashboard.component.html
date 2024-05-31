@@ -1,32 +1,40 @@
-<div class="container-fluid d-flex justify-content-around mt-5 row" style="height: 35vh;">
+<div class="container-fluid d-flex justify-content-around mt-3 row" style="height: 35vh;">
+    <span class="pb-2">
+        <i class="fa fa-home pe-2"></i>
+        <i class="fa fa-chevron-right pe-2"></i>
+        Dashboard
+    </span>
     <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'OverSpeed'" [count]="incidentAQI.length "
+        <app-circular-counter [title]="'OverSpeed'" [count]="incidentOverSpeed.length "
             (click)='fatchData("OverSpeed")'></app-circular-counter>
     </div>
     <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'AQI'" [count]="incidentOverSpeed.length"
-            (click)='fatchData("AQI")'></app-circular-counter>
+        <app-circular-counter [title]="'AQI'" [count]="incidentAQI.length" (click)='fatchData("AQI")'>
+        </app-circular-counter>
     </div>
     <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'Street Light'" [count]="'5'"
-            (click)='fatchData("photos")'></app-circular-counter>
+        <app-circular-counter [title]="'Street Light'" [count]="'5'" (click)='fatchData("photos")'>
+        </app-circular-counter>
     </div>
     <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'Traffic Light'" [count]="'8'"
-            (click)='fatchData("todos")'></app-circular-counter>
+        <app-circular-counter [title]="'Traffic Light'" [count]="'8'" (click)='fatchData("todos")'>
+        </app-circular-counter>
     </div>
-
     @if(flag1){
     <div class="col-12 kendo-grid-data mt-5 d-flex justify-content-center flex-column">
         <h4>Incident details - OverSpeed</h4>
-        <kendo-grid [kendoGridBinding]="incidentOverSpeed" [height]="500" kendoGridSelectBy="id" [pageSize]="20"
-            [pageable]="true" [sortable]="true" [groupable]="true" [reorderable]="true" [resizable]="true"
-            [height]="500" [columnMenu]="{ filter: true }">
-            <kendo-grid-column field="vehicleNo" title="Vehicle No">
+        <kendo-grid [kendoGridBinding]="incidentOverSpeed" kendoGridSelectBy="id" [pageSize]="20" [pageable]="true"
+            [sortable]="true" [groupable]="true" [reorderable]="true" [resizable]="true" [pageSize]="10"
+            [pageable]="pageableSettings">
+            <kendo-grid-column field="vehicleNumber" title="Vehicle No">
+            </kendo-grid-column>
+            <kendo-grid-column field="thresholdSpeed" title="Threshold Speed">
             </kendo-grid-column>
             <kendo-grid-column field="description" title="Description">
             </kendo-grid-column>
-            <kendo-grid-column field="timeStamp" title="Time Stamp">
+            <kendo-grid-column field="startTime" title="Start Time">
+            </kendo-grid-column>
+            <kendo-grid-column field="endTime" title="End Time">
             </kendo-grid-column>
         </kendo-grid>
     </div>
@@ -51,5 +59,3 @@
     </div>
     }
 </div>
-
-
