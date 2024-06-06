@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NgModel } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

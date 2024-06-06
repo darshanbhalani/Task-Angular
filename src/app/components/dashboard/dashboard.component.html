@@ -1,59 +1,50 @@
 <div class="container-fluid d-flex justify-content-around mt-3 row" style="height: 35vh;">
-    <span class="pb-2">
-        <i class="fa fa-home pe-2"></i>
-        <i class="fa fa-chevron-right pe-2"></i>
-        Dashboard
-    </span>
-    <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'OverSpeed'" [count]="incidentOverSpeed.length "
-            (click)='fatchData("OverSpeed")'></app-circular-counter>
+    <div class="container-fluid pb-2 d-flex justify-content-between">
+        <div>
+            <span>
+                <i class="fa fa-home pe-2"></i>
+                <i class="fa fa-chevron-right pe-2"></i>
+                Dashboard
+            </span>
+        </div>
+        <div>
+            <!-- <kendo-switch id="auto-sync" [(ngModel)]="autoSync" (ngModelChange)="onAutoSyncChange()"></kendo-switch> -->
+            <!-- <kendo-dropdownlist *ngIf="autoSync" [data]="syncIntervals" textField="label" valueField="value"
+              [(ngModel)]="syncInterval" (valueChange)="onSyncIntervalChange()" style="width: 100px; margin-right: 10px;">
+            </kendo-dropdownlist> -->
+            <!-- <kendo-switch [(ngModel)]="checked" (click)="checkAutoSync()"></kendo-switch> -->
+            <i class="ms-auto fa fa-solid fa-arrows-rotate" (click)="syncData()"></i>
+        </div>
+        
     </div>
     <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'AQI'" [count]="incidentAQI.length" (click)='fatchData("AQI")'>
+        <app-circular-counter [title]="'OverSpeed'" [count]="incidentOverSpeed.length " (click)='showOverspeedGrid()'>
         </app-circular-counter>
     </div>
     <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'Street Light'" [count]="'5'" (click)='fatchData("photos")'>
+        <app-circular-counter [title]="'Temperature'" [count]="incidentTemperature.length"
+            (click)='showTemperatureGrid()'>
         </app-circular-counter>
     </div>
     <div class="col col-lg-3 col-md-3 col-sm-12">
-        <app-circular-counter [title]="'Traffic Light'" [count]="'8'" (click)='fatchData("todos")'>
+        <app-circular-counter [title]="'AQI'" [count]="incidentAQI.length" (click)='showAQIGrid()'>
         </app-circular-counter>
     </div>
-    @if(flag1){
-    <div class="col-12 kendo-grid-data mt-5 d-flex justify-content-center flex-column">
-        <h4>Incident details - OverSpeed</h4>
-        <kendo-grid [kendoGridBinding]="incidentOverSpeed" kendoGridSelectBy="id" [pageSize]="20" [pageable]="true"
-            [sortable]="true" [groupable]="true" [reorderable]="true" [resizable]="true" [pageSize]="10"
-            [pageable]="pageableSettings">
-            <kendo-grid-column field="vehicleNumber" title="Vehicle No">
-            </kendo-grid-column>
-            <kendo-grid-column field="thresholdSpeed" title="Threshold Speed">
-            </kendo-grid-column>
-            <kendo-grid-column field="description" title="Description">
-            </kendo-grid-column>
-            <kendo-grid-column field="startTime" title="Start Time">
-            </kendo-grid-column>
-            <kendo-grid-column field="endTime" title="End Time">
-            </kendo-grid-column>
-        </kendo-grid>
+    <div class="col col-lg-3 col-md-3 col-sm-12">
+        <app-circular-counter [title]="'Traffic Light'" [count]="'8'">
+        </app-circular-counter>
     </div>
-    }
-    @else if(flag2){
+    @if(isGridVisible){
     <div class="col-12 kendo-grid-data mt-5 d-flex justify-content-center flex-column">
         <div class="kendo-grid-data">
-            <h4>Incident details - AQI</h4>
-            <kendo-grid [kendoGridBinding]="incidentAQI" [height]="500" kendoGridSelectBy="id" [pageSize]="20"
-                [pageable]="true" [sortable]="true" [groupable]="true" [reorderable]="true" [resizable]="true"
-                [height]="500" [columnMenu]="{ filter: true }">
-                <kendo-grid-column field="pollNo" title="Poll No">
+            <h4>Incident details - {{title}}</h4>
+            <kendo-grid [kendoGridBinding]="gridData" kendoGridSelectBy="id" [pageSize]="20" [pageable]="true"
+                [sortable]="true" [groupable]="true" [reorderable]="true" [resizable]="true"
+                [columnMenu]="{ filter: true }" [sort]="sort">
+                @for (item of gridColumns; track item) {
+                <kendo-grid-column field="{{item.field}}" title="{{item.title}}">
                 </kendo-grid-column>
-                <kendo-grid-column field="area" title="Area">
-                </kendo-grid-column>
-                <kendo-grid-column field="description" title="Description">
-                </kendo-grid-column>
-                <kendo-grid-column field="timeStamp" title="Time Stamp">
-                </kendo-grid-column>
+                }
             </kendo-grid>
         </div>
     </div>
