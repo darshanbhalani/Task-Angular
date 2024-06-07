@@ -30,7 +30,7 @@ export class DashboardComponent {
   lastAqiIncidentTime: any;
   title: any;
   public autoSync: boolean = false;
-
+  intervalId:any;
   public syncIntervals: { label: string, value: number }[] = [
     { label: '1 minute', value: 6000 },
     { label: '5 minutes', value: 30000 },
@@ -79,15 +79,19 @@ export class DashboardComponent {
         if (data['success']) {
           if (data['body'].length > 0) {
             console.log(data['body']);
-            this.incidentOverSpeed.push(data['body']);
+            for(let i of data['body']){
+              this.incidentOverSpeed.push(i);
+            }
             this.lastOverspeedIncidentTime = data['lastExecutionTime'];
           }
         }
       });
-      this.httpClient.post<any>('http://localhost:5226/Temperature/SyncNewIncidents', { lastExecutionTime: this.lastTemperatureIncidentTime }).subscribe((data: any) => {
+      this.httpClient.get('http://localhost:5226/Temperature/SyncNewIncidents?lastExecutionTime='+ this.lastOverspeedIncidentTime).subscribe((data: any) => {
         if (data['success']) {
           if (data.length > 0) {
-            this.incidentTemperature.push(data['body']);
+            for(let i of data['body']){
+              this.incidentTemperature.push(i);
+            }
             this.lastTemperatureIncidentTime = data['lastExecutionTime'];
           }
         }
@@ -128,7 +132,7 @@ export class DashboardComponent {
     this.gridData = this.incidentOverSpeed,
       this.gridColumns = [
         { field: 'vehicleNumber', title: 'Vehicle Number' },
-        { field: 'thresholdSpeed', title: 'Threshold Speed' },
+        // { field: 'thresholdSpeed', title: 'Threshold Speed' },
         { field: 'description', title: 'Description' },
         { field: 'startTime', title: 'Start Time' },
         { field: 'endTime', title: 'End Time' }
@@ -141,7 +145,7 @@ export class DashboardComponent {
     this.gridData = this.incidentTemperature,
       this.gridColumns = [
         { field: 'pollNumber', title: 'Poll Number' },
-        { field: 'averageTemperature', title: 'Average Temperature' },
+        // { field: 'averageTemperature', title: 'Average Temperature' },
         { field: 'description', title: 'Description' },
         { field: 'startTime', title: 'Start Time' },
         { field: 'endTime', title: 'End Time' }
