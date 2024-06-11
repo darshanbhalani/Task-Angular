@@ -128,6 +128,7 @@ export class DashboardComponent {
   }
 
   showOverspeedGrid() {
+    this.removeKendoInvalidLicance();
     this.title = "Overspeed"
     this.gridData = this.incidentOverSpeed,
       this.gridColumns = [
@@ -141,6 +142,7 @@ export class DashboardComponent {
   }
 
   showTemperatureGrid() {
+    this.removeKendoInvalidLicance();
     this.title = "Temperature"
     this.gridData = this.incidentTemperature,
       this.gridColumns = [
@@ -154,6 +156,7 @@ export class DashboardComponent {
   }
 
   showAQIGrid() {
+    this.removeKendoInvalidLicance();
     this.title = "AQI"
     this.gridData = this.incidentAQI,
       this.gridColumns = [
@@ -175,4 +178,23 @@ export class DashboardComponent {
     pageSizes: [10, 20, 40, 50, 100, 'All'],
     previousNext: true
   };
+
+  removeKendoInvalidLicance() {
+    setTimeout(() => {
+      // Remove the banner with the unique text content
+      const banner = Array.from(document.querySelectorAll('div')).find((el) =>
+        el.textContent?.includes('No valid license found for Kendo UI for Angular')
+      );
+      if (banner) banner.remove();
+  
+      // Remove the watermark element
+      const watermarkElement = document.querySelector('div[kendowatermarkoverlay]');
+      if (watermarkElement) {
+        watermarkElement.remove();
+        console.log('Watermark removed successfully.');
+      } else {
+        console.log('Watermark element not found.');
+      }
+    }, 0); 
+  }
 }

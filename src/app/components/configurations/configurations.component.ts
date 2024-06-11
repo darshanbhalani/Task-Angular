@@ -41,10 +41,10 @@ export class ConfigurationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
     this.fetchAQIConfigurations();
     this.fetchOverspeedConfigurations();
     this.fetchTemperatureConfigurations();
+    this.removeKendoInvalidLicance();
   }
 
   fetchAQIConfigurations() {
@@ -301,5 +301,24 @@ export class ConfigurationsComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  removeKendoInvalidLicance() {
+    setTimeout(() => {
+      // Remove the banner with the unique text content
+      const banner = Array.from(document.querySelectorAll('div')).find((el) =>
+        el.textContent?.includes('No valid license found for Kendo UI for Angular')
+      );
+      if (banner) banner.remove();
+  
+      // Remove the watermark element
+      const watermarkElement = document.querySelector('div[kendowatermarkoverlay]');
+      if (watermarkElement) {
+        watermarkElement.remove();
+        console.log('Watermark removed successfully.');
+      } else {
+        console.log('Watermark element not found.');
+      }
+    }, 0); 
   }
 }
